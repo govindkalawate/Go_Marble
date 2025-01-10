@@ -1,4 +1,3 @@
-
 # GoMarble API
 
 ## Overview
@@ -226,16 +225,20 @@ The API will be available at `http://localhost:8000`.
   ]
 }
 ```
-<img width="964" alt="Screenshot 2025-01-11 at 12 54 51 AM" src="https://github.com/user-attachments/assets/2089b2a2-c450-42af-aa5d-01b7d15e3897" />
-<p align="center">
-    Output Screen-Shot 1
+<div style="text-align: center;">
+    <img width="800" alt="Screenshot 2025-01-11 at 12 54 51 AM" src="https://github.com/user-attachments/assets/2479676f-43c8-417d-a3c5-dc2063099ae3"/>
+      <p align="center">
+   Output Screenshot 1
 </p>
 
-<img width="1033" alt="Screenshot 2025-01-11 at 12 52 22 AM" src="https://github.com/user-attachments/assets/9aefd682-ac30-4432-bfa4-b6dc71fa0de3" />
-<p align="center">
-    Output Screen-Shot 2
+<div style="text-align: center;">
+    <img width="800" alt="Screenshot 2025-01-11 at 12 52 22 AM" src="https://github.com/user-attachments/assets/716ab712-5c02-4fbb-a033-0cc49e59cf30" />
+     <p align="center">
+   Output Screenshot 2
 </p>
 
 
 ## Conclusion
 The GoMarble API provides a robust solution for extracting product reviews from various e-commerce platforms. With its dynamic CSS identification and browser automation capabilities, it simplifies the process of gathering reviews, making it a valuable tool for developers and businesses alike. If you have any questions or need further assistance, feel free to reach out!
+
+
