@@ -237,6 +237,27 @@ The API will be available at `http://localhost:8000`.
    Output Screenshot 2
 </p>
 
+## Code Quality
+
+The code is organized into two main files: `main.py` and `scraper.py`. Each file is structured to promote readability and maintainability. Key practices include:
+
+- **Modular Design**: The scraper logic is encapsulated in a separate class, making it reusable and easier to test.
+- **Asynchronous Programming**: The use of asynchronous functions allows for efficient handling of I/O-bound operations, such as web scraping and API calls.
+- **Error Handling**: The API includes error handling to manage exceptions gracefully and provide meaningful feedback to users.
+
+## Contribution
+
+Contributions are welcome! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Acknowledgments
+
+- OpenAI for providing the language model.
+- Playwright for the browser automation framework.
+- Sachin Yadhav Sir and Swapnil Bari Sir for the opportunity.
 
 ## Conclusion
 The GoMarble API provides a robust solution for extracting product reviews from various e-commerce platforms. With its dynamic CSS identification and browser automation capabilities, it simplifies the process of gathering reviews, making it a valuable tool for developers and businesses alike. If you have any questions or need further assistance, feel free to reach out!
