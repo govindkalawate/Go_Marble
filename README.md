@@ -16,10 +16,16 @@ The GoMarble API is a web service designed to extract product reviews from vario
 ## API Specification Compliance
 - The API adheres to the provided API endpoint and response format, ensuring that it meets the expected standards for integration and usability.
 - The API endpoints are designed to be intuitive and follow RESTful principles, making it easy for developers to use and integrate into their applications.
+  
+## Frontend UI
+-  Simple Frontend User Interface** that interacts with API.
+  
 ##  System Architecture :
 
 ![Untitled diagram-2025-01-10-171850](https://github.com/user-attachments/assets/d467eae8-99cd-42c6-90a9-7dcc30078e41)
-                                                        System Architecture Diagram
+                                                       <p align="center">
+   System Architecture Diagram
+</p>
 
 **Description**: The System Architecture Diagram illustrates the overall architecture of the GoMarble API, showing how different components interact. It typically includes:
 
@@ -30,7 +36,9 @@ The GoMarble API is a web service designed to extract product reviews from vario
 
 ## System Workflow :
 ![mermaid-ai-diagram-2025-01-10-181913](https://github.com/user-attachments/assets/130a8e2d-8198-4e09-a0b3-e0adc32b26bc)
-                                                          System Workflow Diagram
+                                                         <p align="center">
+  System Workflow Diagram
+</p>
 
 **Description**: The Workflow Diagram outlines the steps taken from receiving a request to returning the scraped reviews. It typically includes:
 
@@ -118,28 +126,24 @@ The API will be available at `http://localhost:8000`.
   ```bash
   curl "http://localhost:8000/api/reviews?url=https://2717recovery.com/products/recovery-cream"
   ```
-
-- **Example Response**:
-  ```json
-  {
-    "reviews_count": 5,
-    "reviews": [
-      {
-        "title": "I love this stuff!",
-        "body": "This product has changed my life for the better. Highly recommend!",
-        "rating": 5
-      },
-      {
-        "title": "Not what I expected",
-        "body": "The product didn't work as advertised.",
-        "rating": 2
-      }
-    ]
-  }
-  ```
-
-
-
+- **Example Response**:  
+```json
+{
+  "reviews_count": 5,
+  "reviews": [
+    {
+      "title": "I love this stuff!",
+      "body": "",
+      "rating": 5,
+      "reviewer": "Shawna Churchill"
+    },
+    {
+      "title": "It’s amazing",
+      "body": "",
+      "rating": 5,
+      "reviewer": "Tania Patterson"
+    },
+    
    ```
 
 2. **Install Dependencies**:
@@ -184,25 +188,54 @@ The API will be available at `http://localhost:8000`.
   curl "http://localhost:8000/api/reviews?url=https://2717recovery.com/products/recovery-cream"
   ```
 
-- **Example Response**:
-  ```json
-  {
-    "reviews_count": 5,
-    "reviews": [
-      {
-        "title": "I love this stuff!",
-        "body": ```json
-        "This product has changed my life for the better. Highly recommend!",
-        "rating": 5
-      },
-      {
-        "title": "Not what I expected",
-        "body": "The product didn't work as advertised.",
-        "rating": 2
-      }
-    ]
-  }
-  ```
+- **OUTPUTS After Sucessful Implementation**:
+ ```json
+{
+  "reviews_count": 5,
+  "reviews": [
+    {
+      "title": "I love this stuff!",
+      "body": "",
+      "rating": 5,
+      "reviewer": "Shawna Churchill"
+    },
+    {
+      "title": "It’s amazing",
+      "body": "",
+      "rating": 5,
+      "reviewer": "Tania Patterson"
+    },
+    {
+      "title": "So far so good. Still in trial stage",
+      "body": "",
+      "rating": 4,
+      "reviewer": "Francis Alvir"
+    },
+    {
+      "title": "So far so good",
+      "body": "",
+      "rating": 4,
+      "reviewer": "G.P."
+    },
+    {
+      "title": "Game-Changer With a Pleasant Scent",
+      "body": "I absolutely love this product! I’ve been using it before my workouts, and it’s been a total game-changer. One of my favorite things about it is that it doesn’t smell like medicine—it has such a pleasant scent! I recently let my business partner use it on her knee that’s been giving her trouble, and she loved it just as much as I do. It’s effective, and enjoyable to use. I’ve even been sharing it on my social media because I believe in it so much. Great job, 27:17 team—thank you for creating such an amazing product!",
+      "rating": 5,
+      "reviewer": "Melvaree Witherspoon"
+    }
+  ]
+}
+```
+<img width="964" alt="Screenshot 2025-01-11 at 12 54 51 AM" src="https://github.com/user-attachments/assets/2089b2a2-c450-42af-aa5d-01b7d15e3897" />
+<p align="center">
+    Output Screen-Shot 1
+</p>
+
+<img width="1033" alt="Screenshot 2025-01-11 at 12 52 22 AM" src="https://github.com/user-attachments/assets/9aefd682-ac30-4432-bfa4-b6dc71fa0de3" />
+<p align="center">
+    Output Screen-Shot 2
+</p>
+
 
 ## Conclusion
 The GoMarble API provides a robust solution for extracting product reviews from various e-commerce platforms. With its dynamic CSS identification and browser automation capabilities, it simplifies the process of gathering reviews, making it a valuable tool for developers and businesses alike. If you have any questions or need further assistance, feel free to reach out!
