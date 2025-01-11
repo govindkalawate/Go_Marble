@@ -17,7 +17,7 @@ The GoMarble API is a web service designed to extract product reviews from vario
 - The API endpoints are designed to be intuitive and follow RESTful principles, making it easy for developers to use and integrate into their applications.
   
 ## Frontend UI
--  Simple Frontend User Interface** that interacts with API.
+-  Simple Frontend User Interface that interacts with API.
   
 ##  System Architecture :
 
@@ -411,11 +411,11 @@ In future iterations of the application, we plan to implement authentication usi
 - **Easy Integration**: Many libraries and frameworks support JWT, making it easier to integrate into existing applications.
 
 ### Implementation Steps
-1. **Install Required Libraries**: Use libraries such as `PyJWT` or `fastapi-jwt-auth` to handle JWT creation and verification.
-2. **User  Registration and Login**: Implement endpoints for user registration and login that generate JWTs upon successful authentication.
-3. **Protect Routes**: Use dependencies to protect specific routes, ensuring that only authenticated users can access them.
-4. **Token Expiration and Refresh**: Implement token expiration and refresh mechanisms to enhance security and user experience.
-5. **Testing and Validation**: Thoroughly test the authentication flow to ensure that it works as expected and is secure against common vulnerabilities.
+- **Install Required Libraries**: Use libraries such as `PyJWT` or `fastapi-jwt-auth` to handle JWT creation and verification.
+- **User  Registration and Login**: Implement endpoints for user registration and login that generate JWTs upon successful authentication.
+- **Protect Routes**: Use dependencies to protect specific routes, ensuring that only authenticated users can access them.
+- **Token Expiration and Refresh**: Implement token expiration and refresh mechanisms to enhance security and user experience.
+- **Testing and Validation**: Thoroughly test the authentication flow to ensure that it works as expected and is secure against common vulnerabilities.
 
 ## Conclusion
 
@@ -429,17 +429,20 @@ The code is organized into two main files: `main.py` and `scraper.py`. Each file
 - **Error Handling**: The API includes error handling to manage exceptions gracefully and provide meaningful feedback to users.
   
 ### Files and Directories : 
-<img width="221" alt="Screenshot 2025-01-11 at 7 09 28 PM" src="https://github.com/user-attachments/assets/a3c8142b-e1a6-40e2-afc7-edb8788040bd" />
+<img width="255" alt="Screenshot 2025-01-12 at 1 02 53 AM" src="https://github.com/user-attachments/assets/591893cf-cfff-468e-bd9c-346f38c713fd" />
+
 
 ### Description of Files and Directories
 
-- **Go_Marble**: The root directory of project.
+- **Go_Marble/**: The root directory of project.
   
 - **app/**: Directory containing the application code.
   - **main.py**: The entry point of the FastAPI application, where the API routes are defined.
   - **scraper.py**: The main script that contains the `ReviewScraper` class, which handles scraping and interacting with the OpenAI API.
 
 - **.env**: A file to store environment variables, including your OpenAI API key.
+  
+- **Dockerfile**: A file that defines how to build the Docker image for the application.
 
 - **requirements.txt**: A file to list the Python packages required for your project.
 
@@ -452,11 +455,9 @@ The code is organized into two main files: `main.py` and `scraper.py`. Each file
 - **Error Handling**: The API includes error handling to manage exceptions gracefully and provide meaningful feedback to users.
 
 ## Contribution
-
 Contributions are welcome! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
 
 ## License
-
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Acknowledgments
