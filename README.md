@@ -108,6 +108,24 @@ uvicorn main:app --reload
 ```
 The API will be available at `http://localhost:8000`.
 
+### Install Dependencies
+Before running the API, make sure to install the required dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+### Set Up Environment Variables
+Create a `.env` file in the app directory and add your OpenAI API key:
+```plaintext
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+### Install Playwright Browsers
+You also need to install the Playwright browsers:
+```bash
+playwright install
+```
+
 ### API Endpoints
 
 #### Get Reviews
@@ -124,6 +142,7 @@ The API will be available at `http://localhost:8000`.
   ```bash
   curl "http://localhost:8000/api/reviews?url=https://2717recovery.com/products/recovery-cream"
   ```
+
 - **Example Response**:  
 ```json
 {
@@ -140,52 +159,11 @@ The API will be available at `http://localhost:8000`.
       "body": "",
       "rating": 5,
       "reviewer": "Tania Patterson"
-    },
-    
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Set Up Environment Variables**:
-   Create a `.env` file in the app directory and add your OpenAI API key:
-   ```plaintext
-   OPENAI_API_KEY=your_openai_api_key_here
-   ```
-
-4. **Install Playwright Browsers**:
-   ```bash
-   playwright install
-   ```
-
-## Usage
-
-### Running the API
-To start the FastAPI server, run the following command:
-```bash
-uvicorn main:app --reload
+    }
+  ]
+}
 ```
-The API will be available at `http://localhost:8000`.
-
-### API Endpoints
-
-#### Get Reviews
-- **Endpoint**: `/api/reviews`
-- **Method**: `GET`
-- **Query Parameters**:
-  - `url` (string): The URL of the product page to scrape.
-
-- **Response**:
-  - **200 OK**: Returns a JSON object containing the count of reviews and the list of reviews.
-  - **500 Internal Server Error**: Returns an error message if an exception occurs.
-
-- **Example Request**:
-  ```bash
-  curl "http://localhost:8000/api/reviews?url=https://2717recovery.com/products/recovery-cream"
-  ```
-
+```
 - **OUTPUTS After Sucessful Implementation**:
  ```json
 {
