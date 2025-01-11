@@ -163,8 +163,8 @@ playwright install
   ]
 }
 ```
-```
-- **OUTPUTS After Sucessful Implementation**:
+
+**OUTPUTS After Sucessful Implementation**:
  ```json
 {
   "reviews_count": 5,
