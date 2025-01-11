@@ -244,34 +244,126 @@ To test the hosted FastAPI application, follow these steps:
 1. **Enter the URL**:
    - In the request URL field, enter the following endpoint:
      ```
-     https://scraping-298313983231.asia-south1.run.app/api/reviews?url=https://<input url>
+     https://scraping-298313983231.asia-south1.run.app/api/reviews?url=<input url>
      ```
 
-### Step 4: Set Up Headers (if needed)
-
-1. **Add Headers** (if your API requires any specific headers):
-   - Click on the **"Headers"** tab below the URL field.
-   - If your API requires an API key or any other headers, add them here. For example:
-     - Key: `Authorization`
-     - Value: `Bearer your_api_key_here` (if applicable)
-
-### Step 5: Send the Request
+### Step 4: Send the Request
 
 1. **Send the Request**:
    - Click the **"Send"** button to send the request to your FastAPI application.
 
-### Step 6: View the Response
+### Step 5: View the Response
 
 1. **Check the Response**:
    - After sending the request, you will see the response from your API in the lower section of Postman.
    - You can view the response body, status code, and headers.
    - If the request was successful, you should see the scraped reviews or any other data returned by your API.
 
-### Step 7: Debugging (if needed)
+### Step 6: Debugging (if needed)
 
 1. **Check for Errors**:
    - If you receive an error response (e.g., 500 Internal Server Error), check the response body for any error messages that can help you debug the issue.
    - Ensure that the URL you are passing as a parameter is valid and accessible.
+
+    
+# Steps to Deploy/Host Flask App Using Docker on Google Cloud Run
+
+## Step 1: Install Google Cloud SDK and Authenticate
+
+First, ensure that you have the Google Cloud SDK installed. Then, authenticate your account:
+
+```bash
+gcloud auth login
+```
+
+## Step 2: Write Dockerfile
+
+Create a `Dockerfile` in the root of your project directory. This file should define how your application is built and run in a Docker container.
+
+## Step 3: Create `requirements.txt` (if not already present)
+
+Ensure you have a `requirements.txt` file that lists all the dependencies your Flask application needs.
+
+## Step 4: Build the Docker Image
+
+Run the following command to build your Docker image:
+
+```bash
+docker build -t <dockerhub_account>/<Image_name>:latest .
+```
+
+## Step 5: Authenticate Docker to Push to Google Container Registry (GCR)
+
+Configure Docker to use the Google Cloud credentials:
+
+```bash
+gcloud auth configure-docker
+```
+
+## Step 6: Push the Docker Image to GCR
+
+Push your Docker image to Google Container Registry:
+
+```bash
+docker push <dockerhub_account>/<Image_name>:latest
+```
+
+## Step 7: Set the Current Active Project for the Command-Line Interface
+
+Set your Google Cloud project ID:
+
+```bash
+gcloud config set project YourGoogleProjectID
+```
+
+## Step 8: Pull the Created Docker Image from Docker Hub
+
+If you need to pull the image from Docker Hub, use the following command:
+
+```bash
+docker pull <dockerhub_account>/<Image_name>:latest
+```
+
+## Step 9: Tag the Image
+
+Tag the Docker image for Google Container Registry:
+
+```bash
+docker tag <dockerhub_account>/<Image_name>:latest gcr.io/YourGoogleProjectID/<dockerhub_account>/<Image_name>:latest
+```
+
+## Step 10: Push the Image to the Container Registry
+
+Push the tagged image to Google Container Registry:
+
+```bash
+docker push gcr.io/YourGoogleProjectID/<dockerhub_account>/<Image_name>:latest
+```
+
+## Step 11: Enable Cloud Run API
+
+Enable the Cloud Run API for your Google Cloud project:
+
+```bash
+gcloud services enable run.googleapis.com
+```
+
+## Step 12: Deploy to Cloud Run
+
+Deploy your application to Cloud Run using the following command:
+
+```bash
+gcloud run deploy <SERVICE_NAME> \
+    --image gcr.io/<PROJECT_ID>/<Image_name>:latest \
+    --platform managed \
+    --region <REGION> \
+    --allow-unauthenticated
+```
+
+## Reference
+
+For more detailed information, refer to the blog post: [Deploy a Flask App with Docker, Google Cloud Run, and Cloud SQL for PostgreSQL](https://blog.devgenius.io/deploy-a-flask-app-with-docker-google-cloud-run-and-cloud-sql-for-postgresql-6dc9e7f4c434).
+
 
 # Optimization Scope In Future
 
