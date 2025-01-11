@@ -446,14 +446,6 @@ The code is organized into two main files: `main.py` and `scraper.py`. Each file
 
 - **requirements.txt**: A file to list the Python packages required for your project.
 
-## Code Quality
-
-The code is organized into two main files: `main.py` and `scraper.py`. Each file is structured to promote readability and maintainability. Key practices include:
-
-- **Modular Design**: The scraper logic is encapsulated in a separate class, making it reusable and easier to test.
-- **Asynchronous Programming**: The use of asynchronous functions allows for efficient handling of I/O-bound operations, such as web scraping and API calls.
-- **Error Handling**: The API includes error handling to manage exceptions gracefully and provide meaningful feedback to users.
-
 ## Contribution
 Contributions are welcome! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
 
