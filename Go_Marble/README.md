@@ -244,6 +244,24 @@ The code is organized into two main files: `main.py` and `scraper.py`. Each file
 - **Modular Design**: The scraper logic is encapsulated in a separate class, making it reusable and easier to test.
 - **Asynchronous Programming**: The use of asynchronous functions allows for efficient handling of I/O-bound operations, such as web scraping and API calls.
 - **Error Handling**: The API includes error handling to manage exceptions gracefully and provide meaningful feedback to users.
+  
+### Files and Directories : 
+<img width="221" alt="Screenshot 2025-01-11 at 7 09 28 PM" src="https://github.com/user-attachments/assets/a3c8142b-e1a6-40e2-afc7-edb8788040bd" />
+
+### Description of Files and Directories
+
+- **Go_Marble**: The root directory of project.
+  
+- **app/**: Directory containing the application code.
+  - **main.py**: The entry point of the FastAPI application, where the API routes are defined.
+  - **scraper.py**: The main script that contains the `ReviewScraper` class, which handles scraping and interacting with the OpenAI API.
+
+- **.env**: A file to store environment variables, including your OpenAI API key.
+
+- **requirements.txt**: A file to list the Python packages required for your project.
+
+- **README.md**: A file to provide an overview of your project, installation instructions, and usage details.
+
 
 ## Contribution
 
