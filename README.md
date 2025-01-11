@@ -140,7 +140,7 @@ playwright install
 
 - **Example Request**:
   ```bash
-  curl "http://localhost:8000/api/reviews?url=https://2717recovery.com/products/recovery-cream"
+  curl "http://localhost:8000/api/reviews?url=<input url>"
   ```
 
 - **Example Response**:  
@@ -266,7 +266,7 @@ To test the hosted FastAPI application, follow these steps:
    - Ensure that the URL you are passing as a parameter is valid and accessible.
 
     
-# Steps to Deploy/Host Flask App Using Docker on Google Cloud Run
+# Steps to Deploy/Host project Using Docker on Google Cloud Run
 
 ## Step 1: Install Google Cloud SDK and Authenticate
 
@@ -367,7 +367,7 @@ For more detailed information, refer to the blog post: [Deploy a Flask App with 
 
 # Optimization Scope In Future
 
-To enhance the performance and efficiency of the Flask application, the following optimizations can be implemented :
+To enhance the performance and efficiency of the FastAPI application, the following optimizations can be implemented:
 
 ## 1. Redis for Caching
 
@@ -381,7 +381,7 @@ Implementing Redis as a caching layer will help reduce the number of API calls m
 
 ### Implementation Steps
 - Set up a Redis server (either locally or using a managed service).
-- Integrate Redis into the Flask application using a library like `Flask-Caching`.
+- Integrate Redis into the FastAPI application using a library like `aioredis` or `fastapi-cache`.
 - Implement caching logic to store and retrieve data from Redis based on specific keys.
 
 ## 2. Rate Limiting
@@ -395,13 +395,31 @@ Implementing rate limiting will help manage the number of requests that users ca
 - **Enhanced Security**: Rate limiting can help mitigate certain types of attacks, such as denial-of-service (DoS) attacks.
 
 ### Implementation Steps
-- Use a library like `Flask-Limiter` to implement rate limiting in the Flask application.
+- Use a library like `fastapi-limiter` to implement rate limiting in the FastAPI application.
 - Define rate limits based on user roles or endpoints (e.g., 100 requests per hour for regular users).
 - Monitor and log rate-limited requests to analyze usage patterns and adjust limits as necessary.
 
+## 3. Authentication Using JWT
+
+### Overview
+In future iterations of the application, we plan to implement authentication using JSON Web Tokens (JWT). This will enhance the security of the application by providing a robust method for user authentication and authorization.
+
+### Benefits
+- **Stateless Authentication**: JWT allows for stateless authentication, meaning that the server does not need to store session information. This can lead to improved scalability.
+- **Enhanced Security**: JWTs can be signed and optionally encrypted, providing a secure way to transmit user information.
+- **Cross-Domain Support**: JWTs can be used across different domains, making them suitable for microservices architectures.
+- **Easy Integration**: Many libraries and frameworks support JWT, making it easier to integrate into existing applications.
+
+### Implementation Steps
+1. **Install Required Libraries**: Use libraries such as `PyJWT` or `fastapi-jwt-auth` to handle JWT creation and verification.
+2. **User  Registration and Login**: Implement endpoints for user registration and login that generate JWTs upon successful authentication.
+3. **Protect Routes**: Use dependencies to protect specific routes, ensuring that only authenticated users can access them.
+4. **Token Expiration and Refresh**: Implement token expiration and refresh mechanisms to enhance security and user experience.
+5. **Testing and Validation**: Thoroughly test the authentication flow to ensure that it works as expected and is secure against common vulnerabilities.
+
 ## Conclusion
 
-By implementing Redis for caching and rate limiting, we can significantly enhance the performance, scalability, and security of the Flask application. These optimizations will lead to a better user experience and more efficient resource utilization.
+By implementing Redis for caching, rate limiting, and JWT for authentication, we can significantly enhance the performance, scalability, and security of the FastAPI application. These optimizations will lead to a better user experience and more efficient resource utilization.
 ## Code Quality
 
 The code is organized into two main files: `main.py` and `scraper.py`. Each file is structured to promote readability and maintainability. Key practices include:
