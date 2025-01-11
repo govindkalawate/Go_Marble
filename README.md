@@ -41,14 +41,13 @@ The GoMarble API is a web service designed to extract product reviews from vario
 
 **Description**: The Workflow Diagram outlines the steps taken from receiving a request to returning the scraped reviews. It typically includes:
 
-### Steps:
 - **Receive Request**: The API receives a request from the client.
 - **Validate Input**: Check if the input URL is valid.
 - **Scrape Data**: Use Playwright to scrape the product page.
 - **Process Data**: Extract relevant reviews and format them.
 - **Return Response**: Send the response back to the client.
 
-### Example Layout:
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
