@@ -214,6 +214,125 @@ playwright install
    Output Screenshot 2
 </p>
 
+  ### Testing the Hosted API with Postman
+  ## Hosted Api Link:
+```
+https://scraping-298313983231.asia-south1.run.app/
+```
+  
+
+To test the hosted FastAPI application, follow these steps:
+
+### Step 1: Open Postman
+
+1. **Download and Install Postman** (if you haven't already):
+   - Go to the [Postman website](https://www.postman.com/downloads/) and download the application for your operating system.
+   - Install Postman by following the installation instructions.
+
+2. **Open Postman**: Launch the Postman application.
+
+### Step 2: Create a New Request
+
+1. **Create a New Request**:
+   - Click on the **"New"** button or the **"+"** tab to create a new request.
+
+2. **Select Request Type**:
+   - In the new request tab, select **GET** from the dropdown menu (this is typically the default).
+
+### Step 3: Enter the Request URL
+
+1. **Enter the URL**:
+   - In the request URL field, enter the following endpoint:
+     ```
+     https://scraping-298313983231.asia-south1.run.app/api/reviews?url=https://<input url>
+     ```
+
+### Step 4: Set Up Headers (if needed)
+
+1. **Add Headers** (if your API requires any specific headers):
+   - Click on the **"Headers"** tab below the URL field.
+   - If your API requires an API key or any other headers, add them here. For example:
+     - Key: `Authorization`
+     - Value: `Bearer your_api_key_here` (if applicable)
+
+### Step 5: Send the Request
+
+1. **Send the Request**:
+   - Click the **"Send"** button to send the request to your FastAPI application.
+
+### Step 6: View the Response
+
+1. **Check the Response**:
+   - After sending the request, you will see the response from your API in the lower section of Postman.
+   - You can view the response body, status code, and headers.
+   - If the request was successful, you should see the scraped reviews or any other data returned by your API.
+
+### Step 7: Debugging (if needed)
+
+1. **Check for Errors**:
+   - If you receive an error response (e.g., 500 Internal Server Error), check the response body for any error messages that can help you debug the issue.
+   - Ensure that the URL you are passing as a parameter is valid and accessible.
+
+# Optimization Scope In Future
+
+To enhance the performance and efficiency of the Flask application, the following optimizations can be implemented :
+
+## 1. Redis for Caching
+
+### Overview
+Implementing Redis as a caching layer will help reduce the number of API calls made for frequently accessed data. By storing the results of API calls in Redis, we can serve cached responses for subsequent requests, significantly improving response times and reducing the load on external APIs.
+
+### Benefits
+- **Reduced Latency**: Cached data can be retrieved much faster than making a new API call.
+- **Lower API Costs**: Fewer API calls can lead to reduced costs, especially if the API has usage limits or charges per request.
+- **Improved Scalability**: By offloading repeated requests to Redis, the application can handle more concurrent users without overwhelming the server.
+
+### Implementation Steps
+- Set up a Redis server (either locally or using a managed service).
+- Integrate Redis into the Flask application using a library like `Flask-Caching`.
+- Implement caching logic to store and retrieve data from Redis based on specific keys.
+
+## 2. Rate Limiting
+
+### Overview
+Implementing rate limiting will help manage the number of requests that users can make to the API within a specified time frame. This can prevent abuse, reduce server load, and ensure fair usage among all users.
+
+### Benefits
+- **Server Protection**: Rate limiting can help protect the server from being overwhelmed by too many requests in a short period.
+- **Improved User Experience**: By controlling the rate of requests, we can ensure that all users have a fair chance to access the API without experiencing slowdowns.
+- **Enhanced Security**: Rate limiting can help mitigate certain types of attacks, such as denial-of-service (DoS) attacks.
+
+### Implementation Steps
+- Use a library like `Flask-Limiter` to implement rate limiting in the Flask application.
+- Define rate limits based on user roles or endpoints (e.g., 100 requests per hour for regular users).
+- Monitor and log rate-limited requests to analyze usage patterns and adjust limits as necessary.
+
+## Conclusion
+
+By implementing Redis for caching and rate limiting, we can significantly enhance the performance, scalability, and security of the Flask application. These optimizations will lead to a better user experience and more efficient resource utilization.
+## Code Quality
+
+The code is organized into two main files: `main.py` and `scraper.py`. Each file is structured to promote readability and maintainability. Key practices include:
+
+- **Modular Design**: The scraper logic is encapsulated in a separate class, making it reusable and easier to test.
+- **Asynchronous Programming**: The use of asynchronous functions allows for efficient handling of I/O-bound operations, such as web scraping and API calls.
+- **Error Handling**: The API includes error handling to manage exceptions gracefully and provide meaningful feedback to users.
+  
+### Files and Directories : 
+<img width="221" alt="Screenshot 2025-01-11 at 7 09 28 PM" src="https://github.com/user-attachments/assets/a3c8142b-e1a6-40e2-afc7-edb8788040bd" />
+
+### Description of Files and Directories
+
+- **Go_Marble**: The root directory of project.
+  
+- **app/**: Directory containing the application code.
+  - **main.py**: The entry point of the FastAPI application, where the API routes are defined.
+  - **scraper.py**: The main script that contains the `ReviewScraper` class, which handles scraping and interacting with the OpenAI API.
+
+- **.env**: A file to store environment variables, including your OpenAI API key.
+
+- **requirements.txt**: A file to list the Python packages required for your project.
+
 ## Code Quality
 
 The code is organized into two main files: `main.py` and `scraper.py`. Each file is structured to promote readability and maintainability. Key practices include:
