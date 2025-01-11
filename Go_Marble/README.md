@@ -17,7 +17,7 @@ The GoMarble API is a web service designed to extract product reviews from vario
 - The API endpoints are designed to be intuitive and follow RESTful principles, making it easy for developers to use and integrate into their applications.
   
 ## Frontend UI
--  Simple Frontend User Interface** that interacts with API.
+-  Simple Frontend User Interface that interacts with API.
   
 ##  System Architecture :
 
