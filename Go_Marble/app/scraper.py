@@ -5,7 +5,7 @@ import random
 from playwright.async_api import async_playwright
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
-
+import re
 
 load_dotenv()
 
@@ -14,11 +14,12 @@ class ReviewScraper:
         openai.api_key = os.getenv("OPENAI_API_KEY")
 
     async def get_dynamic_selectors(self, html_content):
+        """Request dynamic selectors from OpenAI based on the HTML content"""
         max_retries = 5
         base_wait_time = 2  
         max_length = 10000 
         if len(html_content) > max_length:
-            html_content = html_content[:max_length]  # Truncate the content
+            html_content = html_content[:max_length]
 
         for attempt in range(max_retries):
             try:
@@ -27,7 +28,7 @@ class ReviewScraper:
                     messages=[
                         {
                             "role": "user",
-                            "content": f"Provide valid CSS selectors only (no explanations) for extracting reviews from the following HTML content:\n\n{html_content}"
+                            "content": f"Provide CSS selectors for review elements (like review body, reviewer, rating) based on the following HTML content:\n\n{html_content}"
                         }
                     ]
                 )
@@ -60,6 +61,56 @@ class ReviewScraper:
         print("Max retries reached. Unable to get selectors.")
         return None
 
+    async def handle_pagination(self, page):
+        """Handles pagination, supporting both next button and infinite scroll"""
+        pagination_buttons = await page.query_selector_all('a, button')
+        for button in pagination_buttons:
+            text = await button.inner_text()
+            if 'next' in text.lower() or 'load more' in text.lower():
+                await button.click()
+                await page.wait_for_timeout(2000)  # wait for the content to load
+                return True
+
+        try:
+            await page.evaluate("""
+                window.scrollTo(0, document.body.scrollHeight);
+                """)
+            await page.wait_for_timeout(2000)  # wait for content to load
+            return True
+        except Exception as e:
+            print(f"Error handling infinite scroll: {e}")
+            return False
+
+    async def extract_review_data(self, element):
+        """Extracts various review data from a given element."""
+        review_data = {}
+
+        # Extract the body of the review
+        body = await element.query_selector('p') or await element.query_selector('span')
+        review_data['body'] = await body.inner_text() if body else "No review text"
+
+        # Extract the title of the review (if present)
+        title = await element.query_selector('h3') or await element.query_selector('strong')
+        review_data['title'] = await title.inner_text() if title else "N/A"
+
+        # Extract rating (numeric or stars)
+        rating = await element.query_selector('.rating') or await element.query_selector('.star-rating')
+        if rating:
+            rating_text = await rating.inner_text()
+            numeric_rating = re.search(r'\d+', rating_text)  # Match numeric rating
+            review_data['rating'] = int(numeric_rating.group()) if numeric_rating else None
+        else:
+            review_data['rating'] = None
+
+
+        reviewer = await element.query_selector('.reviewer') or await element.query_selector('.author')
+        review_data['reviewer'] = await reviewer.inner_text() if reviewer else "Anonymous"
+
+        author_info = await element.query_selector('.author-info')
+        review_data['author_info'] = await author_info.inner_text() if author_info else "No additional info"
+
+        return review_data
+
     async def scrape_reviews(self, url, max_pages=5):
         async with async_playwright() as p:
             browser = await p.chromium.launch()
@@ -76,10 +127,10 @@ class ReviewScraper:
                 selectors = await self.get_dynamic_selectors(relevant_html)
 
                 if selectors is None:
-                    print("No selectors returned. Trying default selectors.")
-                    selectors = ['.review', '.a-review', '.review-text-content', '.review-body']  # Fallback selectors
+                    print("No selectors returned. Trying default structure selectors.")
+                    selectors = ['.review', '.a-review', '.review-text-content', '.review-body']  
 
-                review_found = False  # Flag to check if reviews are found
+                review_found = False  
 
                 for selector in selectors:
                     print(f"Attempting to query with selector: {selector}")
@@ -88,19 +139,8 @@ class ReviewScraper:
                         if review_elements:
                             review_found = True  # Mark as reviews found
                             for element in review_elements:
-                                title = await element.query_selector('h3')  # Adjust based on actual structure
-                                body = await element.query_selector('p')  # Adjust based on actual structure
-                                rating = await element.query_selector('.rating')  # Adjust selector for rating
-                                reviewer = await element.query_selector('.reviewer')  # Adjust selector for reviewer
-
-                                if title and body:
-                                    review = {
-                                        'title': await title.inner_text(),
-                                        'body': await body.inner_text(),
-                                        'rating': int(await rating.inner_text()) if rating else None,  # Fallback if not found
-                                        'reviewer': await reviewer.inner_text() if reviewer else "Anonymous"
-                                    }
-                                    reviews.append(review)
+                                review = await self.extract_review_data(element)
+                                reviews.append(review)
                     except Exception as e:
                         print(f"Error querying selector '{selector}': {e}")
                         continue
@@ -108,14 +148,22 @@ class ReviewScraper:
                 if not review_found:
                     print("No reviews found with the selected selectors.")
 
-                next_button = await page.query_selector('a.next')  # Adjust selector based on actual structure
-                if next_button:
-                    await next_button.click()
-                    await page.wait_for_timeout(2000)
-                    await asyncio.sleep(5)
-                    page_count += 1
-                else:
-                    break
+                
+                if not await self.handle_pagination(page):
+                    break  
+
+                page_count += 1
 
             await browser.close()
             return reviews
+
+
+async def main():
+    url = "https://2717recovery.com/products/recovery-cream"  
+    scraper = ReviewScraper()
+    reviews = await scraper.scrape_reviews(url)
+    print(reviews)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
